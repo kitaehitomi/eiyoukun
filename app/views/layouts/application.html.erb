@@ -8,8 +8,14 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
   </head>
-
+  
+    <li>
+    <%= link_to   destroy_customer_session_path ,method: :delete, class: "nav-link text-black" do%>
+      <i class="text-right"></i> Log out
+    <%end%>
+    </li>
   <body>
     <%= yield %>
   </body>
