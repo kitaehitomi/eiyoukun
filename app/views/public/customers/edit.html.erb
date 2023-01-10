@@ -6,7 +6,7 @@
 <!--パスワードを使うときはリソース（デバイスのルート）が必要やけど、今回はパスワードを変える必要がない。-->
 
 <%= form_with model: @customer ,url: public_customers_update_path, method: :patch do |f| %>
-
+<%= f.file_field :profile_image, accept: "image/*" %>
 名前
    <div class="field">
   <%= f.label :姓 %>

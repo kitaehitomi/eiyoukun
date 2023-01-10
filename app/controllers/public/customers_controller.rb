@@ -10,7 +10,7 @@ class Public::CustomersController < ApplicationController
      @customer = current_customer
      @customer.update(customer_params)
     # ↑これはどんな内容をアップデートするかを
-     redirect_to  customers_show_path
+     redirect_to  public_customers_show_path
   end
 
   def confirmation
@@ -28,7 +28,7 @@ class Public::CustomersController < ApplicationController
  private
 
   def customer_params
-    params.require(:customer).permit(:last_name, :first_name,:last_name_kana,:first_name_kana,:email,:postal_code,:address,:telephone_number)
+    params.require(:customer).permit(:profile_image, :last_name, :first_name,:last_name_kana,:first_name_kana,:email,:postal_code,:address,:telephone_number)
   end
 end
 

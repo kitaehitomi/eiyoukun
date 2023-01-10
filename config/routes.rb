@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
  
+  namespace :public do
+    resources :post_images, only: [:new, :index, :show,:create]
+  end
   get 'homes/top'
   namespace :admin do
     resources :customers , only: [:index,:show,:edit]
