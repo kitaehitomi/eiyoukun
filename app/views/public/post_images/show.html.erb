@@ -1,16 +1,28 @@
 
+<div>
+    <%= link_to public_post_images_path(@post_image.id) do %>
+    <%#= image_tag post_image.image %>
+  <% end %>
+   <p>投稿ユーザー画像：<%= image_tag @post_image.customer.get_profile_image(100,100) %></p>
+  <p>ショップ名：<%= @post_image.shop_name %></p>
+  <p>説明：<%= @post_image.caption %></p>
+  <p>ユーザーネーム：<%= @post_image.customer.last_name %><%= @post_image.customer.first_name %>さん</p>
+</div>
+
 
 <div>
   <p>コメント件数：<%= @post_image.post_comments.count %></p>
   <% @post_image.post_comments.each do |post_comment| %>
-    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-    <%= post_comment.user.name %>
+    <p><%= image_tag post_comment.customer.get_profile_image(100,100) %></p>
+    <%= post_comment.customer.last_name %><%= post_comment.customer.first_name %>
     <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
   <% end %>
 </div>
-<div>
-  <%= form_with model: [@post_image, @post_comment],url:public_post_image_post_comments_path, method:post  do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
-</div>
+<% if customer_signed_in? %>
+  <div>
+    <%= form_with model:@post_comment,url:public_post_image_post_comments_path(@post_image), method: :post  do |f| %>
+      <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+      <%= f.submit "送信する" %>
+    <% end %>
+  </div>
+<% end %>

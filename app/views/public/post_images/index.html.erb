@@ -8,6 +8,6 @@
   <p>説明：<%= post_image.caption %></p>
   <p>ユーザーネーム：<%= post_image.customer.last_name %><%= post_image.customer.first_name %>さん</p>
   <p><%= link_to "#{post_image.post_comments.count} コメント", public_post_images_path(post_image.id) %></p>
-  <p><%= link_to "詳細を見る", public_post_images_path(post_image.id) %></p>
+  <p><%= link_to "詳細を見る", public_post_image_path(post_image.id) %></p>
 </div>
 <% end %>

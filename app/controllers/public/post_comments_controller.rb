@@ -4,7 +4,7 @@ class Public::PostCommentsController < ApplicationController
     comment = current_customer.post_comments.new(post_comment_params)
     comment.post_image_id = post_image.id
     comment.save
-    redirect_to post_image_path(post_image)
+    redirect_to public_post_image_path(post_image)
   end
 
   private
@@ -13,5 +13,4 @@ class Public::PostCommentsController < ApplicationController
     params.require(:post_comment).permit(:comment)
   end
 
-end
 end
