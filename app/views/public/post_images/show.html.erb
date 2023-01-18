@@ -8,8 +8,21 @@
   <p>説明：<%= @post_image.caption %></p>
   <p>ユーザーネーム：<%= @post_image.customer.last_name %><%= @post_image.customer.first_name %>さん</p>
 </div>
-
-
+<% if customer_signed_in? %>
+<% if @post_image.favorited_by?(current_customer) %>
+    <p>
+      <%= link_to public_post_image_favorites_path(@post_image), method: :delete do %>
+        ♥<%= @post_image.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to public_post_image_favorites_path(@post_image), method: :post do %>
+        ♡<%= @post_image.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+<% end %>
 <div>
   <p>コメント件数：<%= @post_image.post_comments.count %></p>
   <% @post_image.post_comments.each do |post_comment| %>

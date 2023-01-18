@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :public do
     resources :post_images, only: [:new, :index, :show,:create] do
     resources :post_comments, only: [:create]
+    resource :favorites, only: [:create, :destroy]
   end
 end
   get 'homes/top'
@@ -31,6 +32,7 @@ devise_for :customers,skip: [:passwords], controllers: {
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
+  
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
