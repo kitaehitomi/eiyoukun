@@ -11,13 +11,13 @@
 <% if customer_signed_in? %>
 <% if @post_image.favorited_by?(current_customer) %>
     <p>
-      <%= link_to public_post_image_favorites_path(@post_image), method: :delete do %>
+      <%= link_to public_favorites_path(post_image_id: @post_image), method: :delete do %>
         ♥<%= @post_image.favorites.count %> いいね
       <% end %>
     </p>
     <% else %>
     <p>
-      <%= link_to public_post_image_favorites_path(@post_image), method: :post do %>
+      <%= link_to public_favorites_path(post_image_id: @post_image), method: :post do %>
         ♡<%= @post_image.favorites.count %> いいね
       <% end %>
     </p>

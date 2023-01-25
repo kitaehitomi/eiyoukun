@@ -1,24 +1,19 @@
 Rails.application.routes.draw do
- 
-  namespace :public do
-    resources :post_images, only: [:new, :index, :show,:create] do
-    resources :post_comments, only: [:create]
-    resource :favorites, only: [:create, :destroy]
-  end
-end
-  get 'homes/top'
+ get 'homes/top'
   namespace :admin do
     resources :customers , only: [:index,:show,:edit]
   end
-  
+
   namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/confirmation'
-    get 'customers/withdrawal'
-    patch 'customers/update'
-    patch'customers/withdrawal',as: 'withdrawal'
+    resources :post_images, only: [:new, :index, :show,:create] do
+      resources :post_comments, only: [:create]
+    end
+    resource :favorites, only: [:create, :destroy]
+    resources :customers
   end
+
+
+
   # devise_for :customers
   # 顧客用
 # URL /customers/sign_in ...

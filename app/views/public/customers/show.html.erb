@@ -2,7 +2,7 @@
 <h2>マイページ</h2>
 <table>
 <tr><td>登録情報</td>
-<td><%= link_to "編集", public_customers_edit_path %></td></tr>
+<td><%= link_to "編集", edit_public_customer_path %></td></tr>
 <!--引数必要な時とそうでない時がある。引数が必要な時はrails routesで：idがついているところ。それ以外はいらない。-->
 </table>
  <table border="5">
@@ -13,6 +13,9 @@
   <tr><th>住所</th><th><%= @customer.address %></th></tr>
   <tr><th>電話番号</th><th><%= @customer.telephone_number %></th></tr>
   <tr><th>メールアドレス</th><th><%= @customer.email %></th></tr>
+  <tr><th>身長</th><th><%= @customer.height %></th></tr>
+  <tr><th>体重</th><th><%= @customer.weight %></th></tr>
+  <tr><th>BMI</th><th><%= @customer.weight/(@customer.height.to_f/100)/(@customer.height.to_f/100) %></th></tr>
   </table>
 
 

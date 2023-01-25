@@ -14,6 +14,8 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       t.string :address
       t.string :telephone_number
       t.boolean :is_deleted,default: "false"
+      t.integer :height
+      t.integer :weight
 
       ## Recoverable
       t.string   :reset_password_token
