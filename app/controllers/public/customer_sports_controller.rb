@@ -15,6 +15,17 @@ class Public::CustomerSportsController < ApplicationController
       render :new, notice: "送信できませんでした"
     end
    end
+
+  def destroy
+    customer_sport = CustomerSport.find(params[:id])  # データ（レコード）を1件取得
+    customer_sport.destroy  # データ（レコード）を削除
+    redirect_to '/homes/top'  # 投稿一覧画面へリダイレクト
+  end
+  def destroy
+    CustomerSport.destroy_all
+    redirect_to '/homes/top'  # 投稿一覧画面へリダイレクト
+  end
+
       private
     # ストロングパラメータ
     def customer_sport_params

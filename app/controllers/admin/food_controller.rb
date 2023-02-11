@@ -14,6 +14,8 @@ class Admin::FoodController < ApplicationController
       render :index
     end
    end
+   
+
       private
     # ストロングパラメータ
     def food_params

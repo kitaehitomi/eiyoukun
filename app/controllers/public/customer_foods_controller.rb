@@ -6,7 +6,7 @@ class Public::CustomerFoodsController < ApplicationController
     @customer_foods = CustomerFood.all
   end
 
-   def create
+  def create
     @customer_food = CustomerFood.new(customer_food_params)
     if @customer_food.save
       redirect_to homes_top_path,notice: "送信されました"
@@ -14,7 +14,18 @@ class Public::CustomerFoodsController < ApplicationController
       @foods = Food.all
       render :new, notice: "送信できませんでした"
     end
-   end
+  end  
+   
+  def destroy
+    customer_food = CustomerFood.find(params[:id])  # データ（レコード）を1件取得
+    customer_food.destroy  # データ（レコード）を削除
+    redirect_to '/homes/top'  # 投稿一覧画面へリダイレクト
+  end
+  def destroy
+    CustomerFood.destroy_all
+    redirect_to '/homes/top'  # 投稿一覧画面へリダイレクト
+  end
+   
       private
     # ストロングパラメータ
     def customer_food_params

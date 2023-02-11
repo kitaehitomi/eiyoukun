@@ -2,10 +2,12 @@ Rails.application.routes.draw do
  
   
   namespace :public do
-    resources :customer_sports, only: [:new, :create]
+    resources :customer_sports, only: [:new, :create, :destroy]
+    delete '/customer_sports/all_destroy'
   end
   namespace :public do
-    resources :customer_foods, only: [:new, :create]
+    resources :customer_foods, only: [:new, :create, :destroy]
+    delete '/customer_foods/all_destroy'
   end
   namespace :public do
     get 'food/index'
