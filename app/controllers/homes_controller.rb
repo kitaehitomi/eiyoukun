@@ -1,6 +1,6 @@
 class HomesController < ApplicationController
   def top
-    @posts = PostImage.all
+    @posts = Post.all
     @bookmarks = Bookmark.all
   end
   def mypage

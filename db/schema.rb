@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_19_112309) do
+ActiveRecord::Schema.define(version: 2023_02_05_050424) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,11 +54,23 @@ ActiveRecord::Schema.define(version: 2023_01_19_112309) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.integer "post_image_id", null: false
+    t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_bookmarks_on_customer_id"
-    t.index ["post_image_id"], name: "index_bookmarks_on_post_image_id"
+  end
+
+  create_table "customer_foods", force: :cascade do |t|
+    t.integer "food_id"
+    t.integer "customer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "customer_sports", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "sport_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "customers", force: :cascade do |t|
@@ -85,7 +97,14 @@ ActiveRecord::Schema.define(version: 2023_01_19_112309) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "customer_id"
-    t.integer "post_image_id"
+    t.integer "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "foods", force: :cascade do |t|
+    t.string "name"
+    t.integer "kcal"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -93,7 +112,7 @@ ActiveRecord::Schema.define(version: 2023_01_19_112309) do
   create_table "post_comments", force: :cascade do |t|
     t.text "comment"
     t.integer "customer_id"
-    t.integer "post_image_id"
+    t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -106,8 +125,21 @@ ActiveRecord::Schema.define(version: 2023_01_19_112309) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "caption"
+    t.integer "customer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sports", force: :cascade do |t|
+    t.string "name"
+    t.integer "kcal"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "bookmarks", "customers"
-  add_foreign_key "bookmarks", "post_images"
 end

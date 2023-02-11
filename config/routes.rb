@@ -1,7 +1,23 @@
 Rails.application.routes.draw do
+ 
+  
+  namespace :public do
+    resources :customer_sports, only: [:new, :create]
+  end
+  namespace :public do
+    resources :customer_foods, only: [:new, :create]
+  end
+  namespace :public do
+    get 'food/index'
+  end
+  namespace :public do
+    get 'hand/index'
+  end
  get 'homes/top'
   namespace :admin do
     resources :customers , only: [:index,:show,:edit]
+    resources :food 
+    resources :sports
   end
 
   namespace :public do

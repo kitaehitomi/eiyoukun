@@ -1,6 +1,13 @@
 class Public::CustomersController < ApplicationController
   def show
      @customer = current_customer
+     @posts = Post.all
+    @bookmarks = Bookmark.all
+    favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id)
+    @favorites = Post.where(id: favorites)
+  end
+  def mypage
+  @bookmarks = Bookmark.where(customer_id: current_customer.id)
   end
 
   def edit

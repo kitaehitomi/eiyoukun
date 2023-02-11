@@ -15,7 +15,73 @@
   <tr><th>メールアドレス</th><th><%= @customer.email %></th></tr>
   <tr><th>身長</th><th><%= @customer.height %></th></tr>
   <tr><th>体重</th><th><%= @customer.weight %></th></tr>
-  <tr><th>BMI</th><th><%= @customer.weight/(@customer.height.to_f/100)/(@customer.height.to_f/100) %></th></tr>
+  <tr><th>BMI</th><th><%= @customer.bmi %></th></tr>
   </table>
+  
+  
+  <tbody>
+  <% @posts.each do |post| %>
+  <tr>
+    <td><%= post.customer.first_name %></td>
+    <td><%= post.title %></td>
+    <td><%= post.caption %></td>
+    <td><%#= link_to "編集", edit_post_path(@post) %></td>
+    <% if post.bookmarked_by?(current_customer) %>
+      <td><%= link_to "ブックマークを外す", post_bookmarks_path(post), method: :delete %></td>
+    <% else %>
+      <td><%= link_to "ブックマーク", post_bookmarks_path(post), method: :post %></td>
+    <% end %>
+  </tr>
+  <%end%>
+</tbody>
 
 
+
+<table>
+  <caption>ブックマーク一覧</caption>
+  <thead>
+    <tr>
+      <th>投稿者名</th>
+      <th>タイトル</th>
+      <th>本文</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bookmarks.each do |bookmark| %>
+      <tr>
+        <td><%= bookmark.customer.first_name %></td>
+        <td>
+          <%= link_to homes_top_path do %>
+            <%= bookmark.post.title %>
+          <% end %>
+        </td>
+        <td><%= bookmark.post.caption %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>いいねした投稿一覧</p>
+<table>
+  <caption>いいね一覧</caption>
+  <thead>
+    <tr>
+      <th>投稿者名</th>
+      <th>タイトル</th>
+      <th>本文</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @favorites.each do |favorite| %>
+      <tr>
+        <td><%= favorite.customer.first_name %></td>
+        <td>
+          <%= link_to homes_top_path do %>
+            <%= favorite.title %>
+          <% end %>
+        </td>
+        <td><%= favorite.caption %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

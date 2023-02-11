@@ -1,24 +1,29 @@
 class Public::PostImagesController < ApplicationController
   def new
-     @post_image = PostImage.new
+     @post_image = Post.new
   end
   
   def create # 投稿データの保存
-    @post_image = PostImage.new(post_image_params)
+    @post_image = Post.new(post_params)
     @post_image.customer_id = current_customer.id
     @post_image.save
     redirect_to public_post_images_path
   end
 
   def index
-    @post_image = PostImage.new
-    @post_images = PostImage.all
+    @post = Post.new
     @post_comment = PostComment.new
+    if params[:keyword].present?
+      @posts = Post.where('caption LIKE ?', "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @posts = Post.all
+    end
   end
 
   def show
-     @post_image = PostImage.find(params[:id])
-     @post_images = PostImage.all
+     @post_image = Post.find(params[:id])
+     @post_images = Post.all
      @post_comment = PostComment.new
      
   end
@@ -30,7 +35,7 @@ class Public::PostImagesController < ApplicationController
     # 投稿データのストロングパラメータ
   private
 
-  def post_image_params
-    params.require(:post_image).permit(:shop_name, :caption)
+  def post_params
+    params.require(:post).permit(:title, :caption)
   end
 end

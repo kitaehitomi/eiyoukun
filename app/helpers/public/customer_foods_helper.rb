@@ -1,0 +1,2 @@
+module Public::CustomerFoodsHelper
+end

@@ -1,13 +1,26 @@
-<% @post_images.each do |post_image| %>
+検索ワード
+<%= form_with url:  public_post_images_path, local: true, method: :get do |form| %>
+    <%= form.text_field :keyword %>
+    <%= form.submit "検索" %>
+  <% end %>
+  
+  <% if @keyword.present?%>
+  <h2>検索結果 "<%= @keyword %>"</h2>
+  <%end%>
+
+
+
+
+<% @posts.each do |post| %>
 <div>
-    <%= link_to public_post_images_path(post_image.id) do %>
+    <%= link_to public_post_images_path(post.id) do %>
     <%#= image_tag post_image.image %>
   <% end %>
-   <p>投稿ユーザー画像：<%= image_tag post_image.customer.get_profile_image(100,100) %></p>
-  <p>ショップ名：<%= post_image.shop_name %></p>
-  <p>説明：<%= post_image.caption %></p>
-  <p>ユーザーネーム：<%= post_image.customer.last_name %><%= post_image.customer.first_name %>さん</p>
-  <p><%= link_to "#{post_image.post_comments.count} コメント", public_post_images_path(post_image.id) %></p>
-  <p><%= link_to "詳細を見る", public_post_image_path(post_image.id) %></p>
+   <p>投稿ユーザー画像：<%= image_tag post.customer.get_profile_image(100,100) %></p>
+  <p>タイトル：<%= post.title %></p>
+  <p>説明：<%= post.caption %></p>
+  <p>ユーザーネーム：<%= post.customer.last_name %><%= post.customer.first_name %>さん</p>
+  <p><%= link_to "#{post.post_comments.count} コメント", public_post_images_path(post.id) %></p>
+  <p><%= link_to "詳細を見る", public_post_image_path(post.id) %></p>
 </div>
 <% end %>

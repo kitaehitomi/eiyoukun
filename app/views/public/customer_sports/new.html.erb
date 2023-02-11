@@ -1,0 +1,21 @@
+<p>ジャンル一覧</p>
+<% @sports.each do |sport| %>
+<%= sport.name %>
+<%= sport.kcal %>
+<%= form_with model: @new_customer_sport,url: public_customer_sports_path do |f| %>
+<%= f.hidden_field :customer_id, :value => current_customer.id %> <!-- 別のテーブルのidを渡す -->
+<%= f.hidden_field :sport_id, :value => sport.id %>
+<%= f.submit '記録する' %>
+<% end %>
+<% end %>
+<%#if @customer_foods.empty?%>
+<!--食べたものはありません-->
+<%#end%>
+<h2>今日食べた物</h2>
+
+<% @total=0 %>
+<% @customer_sports.each do |customer_sport| %>
+  <p>食べ物の名前：<%= customer_sport.sport.name %></p>
+  <%@total+=customer_sport.sport.kcal %>
+  <p>カロリー合計：<%= @total %></p>
+<% end %>

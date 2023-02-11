@@ -26,44 +26,46 @@
   <i class="text-right"></i></i> ログアウト
 <%end%>
 </li>
+<li>
+<%= link_to   public_hand_index_path ,class: "nav-link text-black" do %>
+  <i class="text-right"></i></i> 手のひら
+<%end%>
+</li>
+<li>
+<%= link_to   admin_food_index_path ,class: "nav-link text-black" do %>
+  <i class="text-right"></i></i> 食べ物
+<%end%>
+</li>
+<li>
+<%= link_to   new_public_post_image_path ,class: "nav-link text-black" do %>
+  <i class="text-right"></i></i> 投稿
+<%end%>
+</li>
+</li>
+<li>
+<%= link_to   admin_sports_path ,class: "nav-link text-black" do %>
+  <i class="text-right"></i></i> 運動
+<%end%>
+</li>
+<li>
+<%= link_to  admin_customers_path ,class: "nav-link text-black" do %>
+  <i class="text-right"></i></i> 管理者側マイページ
+<%end%>
+</li>
+<li>
+<%= link_to  public_customer_path(current_customer.id),class: "nav-link text-black" do %>
+  <i class="text-right"></i></i> 会員側マイページ
+<%end%>
+</li>
+<li>
+<%= link_to new_public_customer_food_path ,class: "nav-link text-black" do %>
+  <i class="text-right"></i></i> 会員側食べ物選択
+<%end%>
+</li>
+<li>
+<%= link_to new_public_customer_sport_path ,class: "nav-link text-black" do %>
+  <i class="text-right"></i></i> 会員側運動選択
+<%end%>
+</li>
 
-<tbody>
-  <% @posts.each do |post| %>
-  <tr>
-    <td><%= post.customer.first_name %></td>
-    <td><%= post.shop_name %></td>
-    <td><%= post.caption %></td>
-    <td><%#= link_to "編集", edit_post_path(@post) %></td>
-    <% if post.bookmarked_by?(current_customer) %>
-      <td><%= link_to "ブックマークを外す", post_bookmarks_path(post), method: :delete %></td>
-    <% else %>
-      <td><%= link_to "ブックマーク", post_bookmarks_path(post), method: :post %></td>
-    <% end %>
-  </tr>
-  <%end%>
-</tbody>
-
-<table>
-  <caption>ブックマーク一覧</caption>
-  <thead>
-    <tr>
-      <th>投稿者名</th>
-      <th>タイトル</th>
-      <th>本文</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @bookmarks.each do |bookmark| %>
-      <tr>
-        <td><%= bookmark.customer.first_name %></td>
-        <td>
-          <%= link_to homes_top_path do %>
-            <%= bookmark.post_image.shop_name %>
-          <% end %>
-        </td>
-        <td><%= bookmark.post_image.caption %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 

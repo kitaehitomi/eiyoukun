@@ -2,7 +2,7 @@ class BookmarksController < ApplicationController
    before_action :authenticate_customer!
 
   def create
-    @post = PostImage.find(params[:post_id])
+    @post = Post.find(params[:post_id])
     bookmark = @post.bookmarks.new(customer_id: current_customer.id)
   
     if bookmark.save
@@ -13,7 +13,7 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    @post = PostImage.find(params[:post_id])
+    @post = Post.find(params[:post_id])
     bookmark = @post.bookmarks.find_by(customer_id: current_customer.id)
     if bookmark.present?
         bookmark.destroy
