@@ -21,7 +21,7 @@
           <%if customer.is_deleted ==  true%>退会済み
           <%elsif customer.is_deleted == false%>会員
           <%end%>
-
+        <%= link_to "show",admin_customer_path(customer.id) %>
           </td>
 
       </tr>

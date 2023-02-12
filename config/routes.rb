@@ -1,28 +1,23 @@
 Rails.application.routes.draw do
- 
-  
   namespace :public do
-    resources :customer_sports, only: [:new, :create, :destroy]
-    delete '/customer_sports/all_destroy'
+    # Errorが出たら14-19をここに戻す
   end
-  namespace :public do
-    resources :customer_foods, only: [:new, :create, :destroy]
-    delete '/customer_foods/all_destroy'
-  end
-  namespace :public do
-    get 'food/index'
-  end
-  namespace :public do
-    get 'hand/index'
-  end
+
  get 'homes/top'
   namespace :admin do
-    resources :customers , only: [:index,:show,:edit]
-    resources :food 
+    resources :customers, only: [:index,:show,:edit,:destroy,:update]
+    resources :food
     resources :sports
   end
 
   namespace :public do
+    delete '/customer_sports/all_destroy'
+    resources :customer_sports, only: [:new, :create, :destroy]
+    delete '/customer_foods/all_destroy'
+    resources :customer_foods, only: [:new, :create, :destroy]
+    get 'food/index'
+    get 'hand', to: 'hand#index'
+
     resources :post_images, only: [:new, :index, :show,:create] do
       resources :post_comments, only: [:create]
     end
@@ -49,5 +44,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 resources :posts, except: [:index] do
   resource :bookmarks, only: [:create, :destroy]
 end
+
+ root to: 'homes#top'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -16,11 +16,15 @@ class Admin::CustomersController < ApplicationController
        redirect_to admin_customer_path ,notice: "Book was successfully updated."
     else
        render :edit
-
     end
-
-
   end
+  
+  def destroy
+    post_comment = PostComment.find(params[:id])  # データ（レコード）を1件取得
+     post_comment.destroy  # データ（レコード）を削除
+    redirect_to '/homes/top'  # 投稿一覧画面へリダイレクト
+  end
+  
    private
     # ストロングパラメータ
     def customer_params

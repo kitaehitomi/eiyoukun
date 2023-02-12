@@ -14,5 +14,9 @@
 
   <%= link_to "edit",edit_admin_customer_path(@customer.id) %>
 
+ <% @customer.post_comments.each do |post_comment| %>
+        <%= post_comment.comment %>
+         <%= link_to "消去する",  admin_customer_path(post_comment.id), method: :delete, "data-confirm" => "Are you sure?" %>
 
+    <%end%>
 

@@ -3,7 +3,7 @@ class Public::CustomerFoodsController < ApplicationController
     @new_customer_food = CustomerFood.new
     # 右側（モデルの名前を書くとき）は大文字スタートの単数系という決まり
     @foods = Food.all
-    @customer_foods = CustomerFood.all
+    @customer_foods = CustomerFood.where(customer_id: current_customer.id)
   end
 
   def create
@@ -14,18 +14,19 @@ class Public::CustomerFoodsController < ApplicationController
       @foods = Food.all
       render :new, notice: "送信できませんでした"
     end
-  end  
-   
+  end
+
   def destroy
     customer_food = CustomerFood.find(params[:id])  # データ（レコード）を1件取得
     customer_food.destroy  # データ（レコード）を削除
     redirect_to '/homes/top'  # 投稿一覧画面へリダイレクト
   end
-  def destroy
-    CustomerFood.destroy_all
+
+  def all_destroy
+    CustomerFood.where(customer_id: current_customer.id).destroy_all
     redirect_to '/homes/top'  # 投稿一覧画面へリダイレクト
   end
-   
+
       private
     # ストロングパラメータ
     def customer_food_params

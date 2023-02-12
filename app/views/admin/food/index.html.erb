@@ -17,7 +17,7 @@
   <td><%= food.name %></td>
   <td><%= food.kcal %></td>
   <td>
-    <%#= link_to "Edit", edit_admin_genre_path(genre.id) %>
+    <%= link_to "消去する", admin_food_path(food.id),method: :delete %>
   </td>
 
 

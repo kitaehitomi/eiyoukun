@@ -3,7 +3,7 @@ class Public::CustomerSportsController < ApplicationController
     @new_customer_sport = CustomerSport.new
     # 右側（モデルの名前を書くとき）は大文字スタートの単数系という決まり
     @sports = Sport.all
-    @customer_sports = CustomerSport.all
+    @customer_sports = CustomerSport.where(customer_id: current_customer.id)
   end
 
    def create
@@ -21,8 +21,9 @@ class Public::CustomerSportsController < ApplicationController
     customer_sport.destroy  # データ（レコード）を削除
     redirect_to '/homes/top'  # 投稿一覧画面へリダイレクト
   end
-  def destroy
-    CustomerSport.destroy_all
+
+  def all_destroy
+    CustomerSport.where(customer_id: current_customer.id).destroy_all
     redirect_to '/homes/top'  # 投稿一覧画面へリダイレクト
   end
 

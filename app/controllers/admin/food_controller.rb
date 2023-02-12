@@ -15,7 +15,11 @@ class Admin::FoodController < ApplicationController
     end
    end
    
-
+  def destroy
+    food = Food.find(params[:id])  # データ（レコード）を1件取得
+    food.destroy  # データ（レコード）を削除
+    redirect_to '/homes/top'  # 投稿一覧画面へリダイレクト
+  end
       private
     # ストロングパラメータ
     def food_params

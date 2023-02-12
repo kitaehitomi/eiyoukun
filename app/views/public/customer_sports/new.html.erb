@@ -8,19 +8,18 @@
 <%= f.submit '記録する' %>
 <% end %>
 <% end %>
-<%#if @customer_foods.empty?%>
-<!--食べたものはありません-->
-<%#end%>
+
 <h2>運動の記録</h2>
 
 <% @total=0 %>
-<% @customer_sports.each do |customer_sport| %>
+  <% @customer_sports.each do |customer_sport| %>
   <p>食べ物の名前：<%= customer_sport.sport.name %></p>
-  <%if customer_foods.empty?%>
+  <% if customer_sport.sport != nil && customer_sport.sport.kcal != nil%>
+    <% @total += customer_sport.sport.kcal %>
+  <% end %>
   <%@total+=customer_sport.sport.kcal %>
   <p>カロリー合計：<%= @total %></p>
  <%= link_to "消去する",  public_customer_sport_path(customer_sport.id), method: :delete, "data-confirm" => "Are you sure?" %>
-<% end %>
 <% end %>
 
 

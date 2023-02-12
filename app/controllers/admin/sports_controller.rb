@@ -14,6 +14,12 @@ class Admin::SportsController < ApplicationController
       render :index
     end
    end
+  def destroy
+    sport = Sport.find(params[:id])  # データ（レコード）を1件取得
+    sport.destroy  # データ（レコード）を削除
+    redirect_to '/homes/top'  # 投稿一覧画面へリダイレクト
+  end
+   
       private
     # ストロングパラメータ
     def sports_params
