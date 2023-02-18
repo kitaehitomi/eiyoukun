@@ -1,3 +1,3 @@
 class Sport < ApplicationRecord
-  has_many :customer_sports
+  has_many :customer_sports, dependent: :destroy
 end

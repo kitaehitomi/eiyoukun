@@ -2,7 +2,7 @@ class Public::PostImagesController < ApplicationController
   def new
      @post_image = Post.new
   end
-  
+
   def create # 投稿データの保存
     @post_image = Post.new(post_params)
     @post_image.customer_id = current_customer.id
@@ -25,12 +25,14 @@ class Public::PostImagesController < ApplicationController
      @post_image = Post.find(params[:id])
      @post_images = Post.all
      @post_comment = PostComment.new
-     
+    @posts = Post.all
+    @bookmarks = Bookmark.all
+
   end
   def destroy
     @post_image = PostImage.find(params[:id])  # データ（レコード）を1件取得
     @post_image.destroy  # データ（レコード）を削除
-    redirect_to PostImage# 投稿一覧画面へリダイレクト  
+    redirect_to PostImage# 投稿一覧画面へリダイレクト
   end
     # 投稿データのストロングパラメータ
   private

@@ -1,71 +1,14 @@
-<h1>Homes#top</h1>
-<p>ここはアドミンでもパブリックでも使えるホームズトップ</p>
+<div class="mx-auto" style="width: 500px;">
 
-<li>
-<%= link_to  public_post_images_path ,class: "nav-link text-black" do %>
-  <i class="text-right"></i> ポストイメージパス
-<%end%>
-</li>
-<li>
-<%= link_to  homes_top_path ,class: "nav-link text-black" do %>
-  <i class="text-right"></i></i> ホームページ
-<%end%>
-</li>
-<li>
-<%= link_to  new_customer_registration_path ,class: "nav-link text-black" do %>
-  <i class="text-right"></i></i> サインアップ
-<%end%>
-</li>
-<li>
-<%= link_to  new_customer_session_path ,class: "nav-link text-black" do %>
-  <i class="text-right"></i></i> サインイン
-<%end%>
-</li>
-<li>
-<%= link_to  destroy_customer_session_path ,class: "nav-link text-black" do %>
-  <i class="text-right"></i></i> ログアウト
-<%end%>
-</li>
-<li>
-<%= link_to public_hand_path ,class: "nav-link text-black" do %>
-  <i class="text-right"></i></i> 手のひら
-<%end%>
-</li>
-<li>
-<%= link_to   admin_food_index_path ,class: "nav-link text-black" do %>
-  <i class="text-right"></i></i> 食べ物
-<%end%>
-</li>
-<li>
-<%= link_to   new_public_post_image_path ,class: "nav-link text-black" do %>
-  <i class="text-right"></i></i> 投稿
-<%end%>
-</li>
-</li>
-<li>
-<%= link_to   admin_sports_path ,class: "nav-link text-black" do %>
-  <i class="text-right"></i></i> 運動
-<%end%>
-</li>
-<li>
-<%= link_to  admin_customers_path ,class: "nav-link text-black" do %>
-  <i class="text-right"></i></i> 管理者側マイページ
-<%end%>
-</li>
-<li>
-<%= link_to  public_customer_path(current_customer.id),class: "nav-link text-black" do %>
-  <i class="text-right"></i></i> 会員側マイページ
-<%end%>
-</li>
-<li>
-<%= link_to new_public_customer_food_path ,class: "nav-link text-black" do %>
-  <i class="text-right"></i></i> 会員側食べ物選択
-<%end%>
-</li>
-<li>
-<%= link_to new_public_customer_sport_path ,class: "nav-link text-black" do %>
-  <i class="text-right"></i></i> 会員側運動選択
-<%end%>
-</li>
+<h1>ニュートリくん</h1>
+<p>健康に良さそうな食事を投稿しよう</p>
+<%= link_to "手ばかり栄養とは", public_hand_path ,class: "btn btn-warning"  %>
 
 
+<%= link_to "投稿一覧", public_post_images_path ,class: "btn btn-success"  %>
+
+<% if customer_signed_in? %>
+<%= link_to  "投稿する" , new_public_post_image_path ,class: "btn btn-info"  %>
+<%end%>
+
+</div>

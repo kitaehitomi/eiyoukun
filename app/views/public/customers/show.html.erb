@@ -1,87 +1,85 @@
-
-<h2>マイページ</h2>
-<table>
-<tr><td>登録情報</td>
-<td><%= link_to "編集", edit_public_customer_path %></td></tr>
-<!--引数必要な時とそうでない時がある。引数が必要な時はrails routesで：idがついているところ。それ以外はいらない。-->
-</table>
- <table border="5">
-  <tr><th>会員ID</th><th><%= @customer.id %></th></tr>
-  <tr><th>氏名</th><th><%= @customer.first_name %><%= @customer.last_name %></th></tr>
-  <tr><th>フリガナ</th><th><%= @customer.first_name_kana %><%= @customer.last_name_kana %></th></tr>
-  <tr><th>郵便番号</th><th><%= @customer.postal_code %></th></tr>
-  <tr><th>住所</th><th><%= @customer.address %></th></tr>
-  <tr><th>電話番号</th><th><%= @customer.telephone_number %></th></tr>
-  <tr><th>メールアドレス</th><th><%= @customer.email %></th></tr>
-  <tr><th>身長</th><th><%= @customer.height %></th></tr>
-  <tr><th>体重</th><th><%= @customer.weight %></th></tr>
-  <tr><th>BMI</th><th><%= @customer.bmi %></th></tr>
-  </table>
+<div class="mx-auto container" style="">
+  <div class="row">
+  
+  　<div class="col">
+      <h3 class="border border-warning rounded-pill">マイページ</h3>
+  
+      <table>
+      <tr><td>登録情報</td>
+      <td><i class="fas fa-wrench"></i><%= link_to "編集", edit_public_customer_path %></td></tr>
+      <!--引数必要な時とそうでない時がある。引数が必要な時はrails routesで：idがついているところ。それ以外はいらない。-->
+      </table>
+       <table border="5">
+        <tr><th>会員ID</th><th><%= @customer.id %></th></tr>
+        <tr><th>氏名</th><th><%= @customer.first_name %><%= @customer.last_name %></th></tr>
+        <tr><th>フリガナ</th><th><%= @customer.first_name_kana %><%= @customer.last_name_kana %></th></tr>
+        <tr><th>郵便番号</th><th><%= @customer.postal_code %></th></tr>
+        <tr><th>住所</th><th><%= @customer.address %></th></tr>
+        <tr><th>電話番号</th><th><%= @customer.telephone_number %></th></tr>
+        <tr><th>メールアドレス</th><th><%= @customer.email %></th></tr>
+        <tr><th>身長</th><th><%= @customer.height %></th></tr>
+        <tr><th>体重</th><th><%= @customer.weight %></th></tr>
+        <tr><th>BMI</th><th><%= @customer.bmi %></th></tr>
+        </table>
+        
+        
+        <tbody>
+      </tbody>
+    </div>
   
   
-  <tbody>
-  <% @posts.each do |post| %>
-  <tr>
-    <td><%= post.customer.first_name %></td>
-    <td><%= post.title %></td>
-    <td><%= post.caption %></td>
-    <td><%#= link_to "編集", edit_post_path(@post) %></td>
-    <% if post.bookmarked_by?(current_customer) %>
-      <td><%= link_to "ブックマークを外す", post_bookmarks_path(post), method: :delete %></td>
-    <% else %>
-      <td><%= link_to "ブックマーク", post_bookmarks_path(post), method: :post %></td>
-    <% end %>
-  </tr>
-  <%end%>
-</tbody>
-
-
-
-<table>
-  <caption>ブックマーク一覧</caption>
-  <thead>
-    <tr>
-      <th>投稿者名</th>
-      <th>タイトル</th>
-      <th>本文</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @bookmarks.each do |bookmark| %>
-      <tr>
-        <td><%= bookmark.customer.first_name %></td>
-        <td>
-          <%= link_to homes_top_path do %>
-            <%= bookmark.post.title %>
+  
+  <div class="col">
+    <table>
+      <h3 class="border border-warning rounded-pill">ブックマーク一覧</h3>
+      <thead>
+        <tr>
+          <th>投稿者名</th>
+          <th>タイトル</th>
+          <th>本文</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bookmarks.each do |bookmark| %>
+          <tr>
+            <td><%= bookmark.customer.first_name %></td>
+            <td>
+              <%= link_to homes_top_path do %>
+                <%= bookmark.post.title %>
+              <% end %>
+            </td>
+            <td><%= bookmark.post.caption %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+  
+  <div class="col">
+      <h3 class="border border-warning rounded-pill">いいねした投稿</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>投稿者名</th>
+            <th>タイトル</th>
+            <th>本文</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @favorites.each do |favorite| %>
+            <tr>
+              <td><%= favorite.customer.first_name %></td>
+              <td>
+                <%= link_to homes_top_path do %>
+                  <%= favorite.title %>
+                <% end %>
+              </td>
+              <td><%= favorite.caption %></td>
+            </tr>
           <% end %>
-        </td>
-        <td><%= bookmark.post.caption %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-<p>いいねした投稿一覧</p>
-<table>
-  <caption>いいね一覧</caption>
-  <thead>
-    <tr>
-      <th>投稿者名</th>
-      <th>タイトル</th>
-      <th>本文</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @favorites.each do |favorite| %>
-      <tr>
-        <td><%= favorite.customer.first_name %></td>
-        <td>
-          <%= link_to homes_top_path do %>
-            <%= favorite.title %>
-          <% end %>
-        </td>
-        <td><%= favorite.caption %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+</div>

@@ -1,29 +1,83 @@
 <!DOCTYPE html>
-<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 <html>
-  <head>
-    <title>Eiyoukun</title>
+<head>
+  <title>Eiyoukun</title>
+  <div class="p-3 mb-2 bg-success text-white">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-  </head>
-
-    <li>
-    <%= link_to   destroy_customer_session_path ,method: :delete, class: "nav-link text-black" do%>
-      <i class="text-right"></i> Log out
-    <%end%>
-    </li>
-     <li>
-    <%= link_to   homes_top_path ,method: :get, class: "nav-link text-black" do%>
-      <i class="text-right"></i> home
-    <%end%>
-    </li>
-  <body>
-    <%= notice %>
+      <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+          <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+            <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+            <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      
+</head>
+<body>
+  <header class="shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-white">
+      <!--上のこの既出が背景の色を決めている-->
+      <div class="container">
+        <i class="fas fa-seedling"></i><%=link_to 'トップページ',homes_top_path %>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if customer_signed_in? %>
+                <li>
+                  <div class="nav-link text-black"> <i class="ext-white"></i> ようこそ、
+                    <%= current_customer.last_name %>さん! </div>
+                </li>
+                <li>
+                  <%= link_to  public_customer_path(current_customer.id) ,class: "nav-link ext-white " do %> <i class="text-right"></i><i class="fas fa-home"></i> マイページ
+                    <%end%>
+                </li>
+                <li>
+                  <%= link_to new_public_customer_food_path ,class: "nav-link text-white" do %> <i class="text-right"></i><i class="fas fa-hamburger"></i> 食べ物選択
+                    <%end%>
+                </li>
+                <li>
+                  <%= link_to new_public_customer_sport_path ,class: "nav-link text-white" do %> <i class="text-right"></i><i class="fas fa-running"></i>運動選択
+                    <%end%>
+                </li>
+                <li>
+                  <%= link_to  destroy_customer_session_path , method: :delete, class: "nav-link text-white" do %> <i class="text-right"></i><i class="fas fa-user-alt-slash"></i> ログアウト
+                    <%end%>
+                </li>
+                <%elsif admin_signed_in? %>
+                  <li>
+                    <%= link_to   admin_food_index_path ,class: "nav-link text-white" do %> <i class="text-right"></i><i class="fas fa-hamburger"> </i>食べ物
+                      <%end%>
+                  </li>
+                  <li>
+                    <%= link_to   admin_sports_path ,class: "nav-link text-white" do %> <i class="text-right"></i><i class="fas fa-running"> </i>運動
+                      <%end%>
+                  </li>
+                  <li>
+                    <%= link_to  admin_customers_path ,class: "nav-link text-white" do %> <i class="text-right"></i><i class="fas fa-warehouse"></i>管理者側マイページ
+                      <%end%>
+                  </li>
+                  <li>
+                    <%= link_to  destroy_customer_session_path , method: :delete,class: "nav-link text-white" do %> <i class="text-right"></i><i class="fas fa-user-alt-slash"></i> ログアウト
+                      <%end%>
+                  </li>
+                  <% else %>
+                    <li>
+                      <%= link_to  new_customer_registration_path ,class: "nav-link text-white" do %> <i class="text-right"></i><i class="fas fa-user-alt"></i> サインアップ
+                        <%end%>
+                    </li>
+                    <li>
+                      <%= link_to  new_customer_session_path ,class: "nav-link text-white" do %> <i class="text-right"></i><i class="fas fa-user-check"></i> サインイン
+                        <%end%>
+                    </li>
+                    <%end%>
+                </ul>
+          </div>
+       </div>
+    </div>
+     </nav>
+  </header>
+  <%= notice %>
+  <div class=row>
     <%= yield %>
-  </body>
+  </div>
+    <footer class="fixed-bottom bg-warning text-center"><i class="fas fa-fish"></i>nutrition<i class="fas fa-egg"></i><footer>
+</body>
+
 </html>

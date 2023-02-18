@@ -3,10 +3,26 @@
     <%= link_to public_post_images_path(@post_image.id) do %>
     <%#= image_tag post_image.image %>
   <% end %>
+  
+  <% @posts.each do |post| %>
    <p>投稿ユーザー画像：<%= image_tag @post_image.customer.get_profile_image(100,100) %></p>
   <p>ショップ名：<%= @post_image.title %></p>
   <p>説明：<%= @post_image.caption %></p>
   <p>ユーザーネーム：<%= @post_image.customer.last_name %><%= @post_image.customer.first_name %>さん</p>
+  <tr>
+    <td><%= post.customer.first_name %></td>
+    <td><%= post.title %></td>
+    <td><%= post.caption %></td>
+    <td><%#= link_to "編集", edit_post_path(@post) %></td>
+    <% if post.bookmarked_by?(current_customer) %>
+      <td><%= link_to "ブックマークを外す", post_bookmarks_path(post), method: :delete %></td>
+    <% else %>
+      <td><%= link_to "ブックマーク", post_bookmarks_path(post), method: :post %></td>
+    <% end %>
+  </tr>
+  <%end%>
+  
+  
 </div>
 <% if customer_signed_in? %>
 <% if @post_image.favorited_by?(current_customer) %>
@@ -39,3 +55,5 @@
     <% end %>
   </div>
 <% end %>
+
+ 
