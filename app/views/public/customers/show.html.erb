@@ -1,9 +1,9 @@
 <div class="mx-auto container" style="">
   <div class="row">
-  
+
   　<div class="col">
       <h3 class="border border-warning rounded-pill">マイページ</h3>
-  
+
       <table>
       <tr><td>登録情報</td>
       <td><i class="fas fa-wrench"></i><%= link_to "編集", edit_public_customer_path %></td></tr>
@@ -20,15 +20,16 @@
         <tr><th>身長</th><th><%= @customer.height %></th></tr>
         <tr><th>体重</th><th><%= @customer.weight %></th></tr>
         <tr><th>BMI</th><th><%= @customer.bmi %></th></tr>
+        <tr><th>目標摂取カロリー</th><th><%= @customer.kcal %></th></tr>
         </table>
-        
-        
+
+
         <tbody>
       </tbody>
     </div>
-  
-  
-  
+
+
+
   <div class="col">
     <table>
       <h3 class="border border-warning rounded-pill">ブックマーク一覧</h3>
@@ -44,7 +45,7 @@
           <tr>
             <td><%= bookmark.customer.first_name %></td>
             <td>
-              <%= link_to homes_top_path do %>
+              <%= link_to public_post_path(bookmark.post_id) do %>
                 <%= bookmark.post.title %>
               <% end %>
             </td>
@@ -54,7 +55,7 @@
       </tbody>
     </table>
     </div>
-  
+
   <div class="col">
       <h3 class="border border-warning rounded-pill">いいねした投稿</h3>
       <table>
@@ -70,7 +71,7 @@
             <tr>
               <td><%= favorite.customer.first_name %></td>
               <td>
-                <%= link_to homes_top_path do %>
+                <%= link_to public_post_path(favorite.id) do %>
                   <%= favorite.title %>
                 <% end %>
               </td>

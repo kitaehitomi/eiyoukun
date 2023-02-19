@@ -18,12 +18,19 @@ Rails.application.routes.draw do
     get 'food/index'
     get 'hand', to: 'hand#index'
 
-    resources :post_images, only: [:new, :index, :show,:create] do
-      resources :post_comments, only: [:create]
+    resources :posts, only: [:new, :index, :show,:create,:destroy] do
+      resources :post_comments, only: [:create,:destroy]
+      resource :bookmarks, only: [:create, :destroy]
     end
     resource :favorites, only: [:create, :destroy]
-    resources :customers
-  end
+    resources :customers do
+      collection do
+        get 'confirmation'
+        patch 'withdrawal'
+      end
+   end
+ end
+
 
 
 
@@ -41,9 +48,9 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
 
-resources :posts, except: [:index] do
-  resource :bookmarks, only: [:create, :destroy]
-end
+# resources :posts, except: [:index] do
+
+# end
 
  root to: 'homes#top'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

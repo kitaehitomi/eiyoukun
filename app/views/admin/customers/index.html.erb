@@ -1,31 +1,35 @@
-
-
- <h3 class="border border-warning rounded-pill">会員一覧</h3>
-
-<table>
-<thead>
-    <tr>
-      <th>会員ID</th>
-      <th>氏名</th>
-      <th>メールアドレス</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @customers.each do |customer| %>
-      <tr>
-        <td><%= customer.id %></td>
-        <td><%= link_to customer.first_name,admin_customer_path(customer.id)%></td>
-        <td><%= customer.email %></td>
-        <td>
-          <%if customer.is_deleted ==  true%>退会済み
-          <%elsif customer.is_deleted == false%>会員
-          <%end%>
-        <%= link_to "show",admin_customer_path(customer.id) %>
-          </td>
-
-      </tr>
-    <%end%>
-    <!--each文を使って情報を1行ずつ取り出す-->
-  </tbody>
-</table>
+ <div class="mx-auto container">
+  <div class="row">
+  　<div class="col"> 
+       <h3 class="border border-warning rounded-pill text-center">会員一覧</h3>
+      
+        <table>
+        <thead>
+            <tr>
+              <th>会員ID</th>
+              <th>氏名</th>
+              <th>メールアドレス</th>
+              <th>ステータス</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @customers.each do |customer| %>
+              <tr>
+                <td><%= customer.id %></td>
+                <td><%= link_to customer.first_name,admin_customer_path(customer.id)%></td>
+                <td><%= customer.email %></td>
+                <td>
+                  <%if customer.is_deleted ==  true%>退会済み
+                  <%elsif customer.is_deleted == false%>会員
+                  <%end%>
+                <%= link_to "show",admin_customer_path(customer.id) %>
+                  </td>
+        
+              </tr>
+            <%end%>
+            <!--each文を使って情報を1行ずつ取り出す-->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

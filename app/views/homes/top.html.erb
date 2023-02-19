@@ -5,10 +5,10 @@
 <%= link_to "手ばかり栄養とは", public_hand_path ,class: "btn btn-warning"  %>
 
 
-<%= link_to "投稿一覧", public_post_images_path ,class: "btn btn-success"  %>
+<%= link_to "投稿一覧", public_posts_path ,class: "btn btn-success"  %>
 
 <% if customer_signed_in? %>
-<%= link_to  "投稿する" , new_public_post_image_path ,class: "btn btn-info"  %>
+<%= link_to  "投稿する" , new_public_post_path ,class: "btn btn-info"  %>
 <%end%>
 
 </div>

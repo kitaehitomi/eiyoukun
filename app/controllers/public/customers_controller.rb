@@ -2,7 +2,7 @@ class Public::CustomersController < ApplicationController
   def show
      @customer = current_customer
      @posts = Post.all
-    @bookmarks = Bookmark.all
+    @bookmarks = @customer.bookmarks
     favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id)
     @favorites = Post.where(id: favorites)
   end

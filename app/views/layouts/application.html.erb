@@ -2,30 +2,30 @@
 <html>
 <head>
   <title>Eiyoukun</title>
-  <div class="p-3 mb-2 bg-success text-white">
     <meta name="viewport" content="width=device-width,initial-scale=1">
       <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
           <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
             <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
             <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-      
+
 </head>
 <body>
-  <header class="shadow-sm">
+  <div class="p-3 mb-2 bg-success text-white">
+    <header class="shadow-sm">
     <nav class="navbar navbar-expand-lg navbar-white">
       <!--上のこの既出が背景の色を決めている-->
       <div class="container">
-        <i class="fas fa-seedling"></i><%=link_to 'トップページ',homes_top_path %>
+        <i class="fas fa-seedling"></i><%=link_to 'トップページ',homes_top_path, class: "text-white" %>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               <% if customer_signed_in? %>
                 <li>
-                  <div class="nav-link text-black"> <i class="ext-white"></i> ようこそ、
+                  <div class="nav-link text-white"> <i class="text-right"></i> ようこそ、
                     <%= current_customer.last_name %>さん! </div>
                 </li>
                 <li>
-                  <%= link_to  public_customer_path(current_customer.id) ,class: "nav-link ext-white " do %> <i class="text-right"></i><i class="fas fa-home"></i> マイページ
+                  <%= link_to  public_customer_path(current_customer.id) ,class: "nav-link text-white " do %> <i class="text-right"></i><i class="fas fa-home"></i> マイページ
                     <%end%>
                 </li>
                 <li>
@@ -68,13 +68,14 @@
                     </li>
                     <%end%>
                 </ul>
-          </div>
+
        </div>
     </div>
      </nav>
   </header>
+  </div>
   <%= notice %>
-  <div class=row>
+  <div>
     <%= yield %>
   </div>
     <footer class="fixed-bottom bg-warning text-center"><i class="fas fa-fish"></i>nutrition<i class="fas fa-egg"></i><footer>

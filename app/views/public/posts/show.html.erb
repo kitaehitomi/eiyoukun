@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+        <%#= link_to public_posts_path(@post_image.id) do %>
+      <% if @post.image.attached? %>
+        <%= image_tag @post.image %>
+      <% else %>
+        <%= image_tag 'no_image.jpg' %>
+      <% end %>
+      <%# end %>
+    </div>
+    <div class="col">
+        <p>投稿ユーザー画像：<%= image_tag @post.customer.get_profile_image(100,100) %></p>
+        <p>タイトル：<%= @post.title %></p>
+        <p>説明：<%= @post.caption %></p>
+        <p>ユーザーネーム：<%= @post.customer.last_name %><%= @post.customer.first_name %>さん</p>
+      <tr>
+        <td><%#= link_to "編集", edit_post_path(@post) %></td>
+        <% if @post.bookmarked_by?(current_customer) %>
+          <td><%= link_to "ブックマークを外す", public_post_bookmarks_path(@post), method: :delete %></td>
+        <% else %>
+          <td><%= link_to "ブックマーク", public_post_bookmarks_path(@post), method: :post %></td>
+        <% end %>
+      </tr>
+
+      <% if customer_signed_in? %>
+      <% if @post.favorited_by?(current_customer) %>
+          <p>
+            <%= link_to public_favorites_path(post_image_id: @post), method: :delete do %>
+              ♥<%= @post.favorites.count %> いいね
+            <% end %>
+          </p>
+          <% else %>
+          <p>
+            <%= link_to public_favorites_path(post_image_id: @post), method: :post do %>
+              ♡<%= @post.favorites.count %> いいね
+            <% end %>
+          </p>
+        <% end %>
+      <% end %>
+      <div>
+        <p>コメント件数：<%= @post.post_comments.count %></p>
+        <% @post.post_comments.each do |post_comment| %>
+          <p><%= image_tag post_comment.customer.get_profile_image(100,100) %></p>
+          <%= post_comment.customer.last_name %><%= post_comment.customer.first_name %>
+          <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+          <% if post_comment.customer_id == current_customer.id %>
+          <p><%= link_to "消去する", public_post_post_comment_path(post_comment.id), method: :delete %></p>
+          <% end %>
+        <% end %>
+      </div>
+      <% if customer_signed_in? %>
+        <div>
+          <%= form_with model: @post_comment, url: public_post_post_comments_path(@post), method: :post  do |f| %>
+            <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+            <%= f.submit "送信する" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,22 +1,26 @@
-
-<h2>会員詳細画面</h2>
- <p>会員ID<%= @customer.id %></p>
-  <p>氏名：<%= @customer.first_name %><%= @customer.last_name %></p>
-  <p>フリガナ：<%= @customer.first_name_kana %><%= @customer.last_name_kana %></p>
-  <p>郵便番号：<%= @customer.postal_code %></p>
-  <p>住所：<%= @customer.address %></p>
-  <p>電話番号：<%= @customer.telephone_number %></p>
-  <p>メールアドレス：<%= @customer.email %></p>
-  <p>会員ステータス：
-  <%if @customer.is_deleted ==  true%>退会済み
-  <%elsif @customer.is_deleted == false%>会員
-  <%end%></p>
-
-  <%= link_to "edit",edit_admin_customer_path(@customer.id) %>
-
- <% @customer.post_comments.each do |post_comment| %>
-        <%= post_comment.comment %>
-         <%= link_to "消去する",  admin_customer_path(post_comment.id), method: :delete, "data-confirm" => "Are you sure?" %>
-
-    <%end%>
-
+ <div class="mx-auto container">
+  <div class="row">
+  　<div class="col"> 
+       <h2 class="border border-warning rounded-pill text-center">会員詳細画面</h2>
+       <p>会員ID<%= @customer.id %></p>
+        <p>氏名：<%= @customer.first_name %><%= @customer.last_name %></p>
+        <p>フリガナ：<%= @customer.first_name_kana %><%= @customer.last_name_kana %></p>
+        <p>郵便番号：<%= @customer.postal_code %></p>
+        <p>住所：<%= @customer.address %></p>
+        <p>電話番号：<%= @customer.telephone_number %></p>
+        <p>メールアドレス：<%= @customer.email %></p>
+        <p>会員ステータス：
+        <%if @customer.is_deleted ==  true%>退会済み
+        <%elsif @customer.is_deleted == false%>会員
+        <%end%></p>
+      
+        <%= link_to "edit",edit_admin_customer_path(@customer.id) %>
+      
+       <% @customer.post_comments.each do |post_comment| %>
+              <%= post_comment.comment %>
+               <%= link_to "消去する",  admin_customer_path(post_comment.id), method: :delete, "data-confirm" => "Are you sure?" %>
+      
+          <%end%>
+   </div>
+  </div>
+</div>

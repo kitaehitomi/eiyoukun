@@ -1,0 +1,37 @@
+検索ワード
+<%= form_with url:  public_posts_path, local: true, method: :get do |form| %>
+    <%= form.text_field :keyword %>
+    <%= form.submit "検索" %>
+<% end %>
+
+  <% if @keyword.present?%>
+  <h2>検索結果 "<%= @keyword %>"</h2>
+  <%end%>
+
+
+<div class="container">
+  <div class="row">
+
+
+
+<% @posts.each do |post| %>
+
+<div class="col-4">
+    <%= link_to public_posts_path(post.id) do %>
+    <%#= image_tag post_image.image %>
+  <% end %>
+   <p>投稿ユーザー画像：<%= image_tag post.customer.get_profile_image(100,100) %></p>
+  <p>タイトル：<%= post.title %></p>
+  <p>説明：<%= post.caption %></p>
+  <p>ユーザーネーム：<%= post.customer.last_name %><%= post.customer.first_name %>さん</p>
+  <p><%= link_to "#{post.post_comments.count} コメント", public_posts_path(post.id) %></p>
+  <p><%= link_to "詳細を見る", public_post_path(post.id) %></p>
+  <% if post.customer_id == current_customer.id %>
+    <p><%= link_to "消去する", public_post_path(post.id), method: :delete %></p>
+  <% end %>
+  </div>
+<% end %>
+<%= paginate @posts %>
+</div>
+
+</div>

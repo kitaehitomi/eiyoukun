@@ -1,20 +1,20 @@
-<div class="mx-auto container" style="">
-  <div class="row">
+<div class="mx-auto container">
+  <div class="row row-wrap">
   　<div class="col">
   　   <h3 class="border border-warning rounded-pill">食べ物一覧</h3>
-        <% @foods.each do |food| %>
+      <% @foods.each do |food| %>
         <%= food.name %>
         <%= food.kcal %>
         <%= form_with model: @new_customer_food,url: public_customer_foods_path do |f| %>
-        <%= f.hidden_field :customer_id, :value => current_customer.id %> <!-- 別のテーブルのidを渡す -->
-        <%= f.hidden_field :food_id, :value => food.id %>
-        <%= f.submit '記録する' %>
+          <%= f.hidden_field :customer_id, :value => current_customer.id %> <!-- 別のテーブルのidを渡す -->
+          <%= f.hidden_field :food_id, :value => food.id %>
+          <%= f.submit '記録する' %>
         <% end %>
-        <% end %>
+      <% end %>
     </div>
     <div class="col">
-       <h3 class="border border-warning rounded-pill">食べたもの記録</h3>
-      
+      <h3 class="border border-warning rounded-pill">食べたもの記録</h3>
+
       <% @total=0 %>
       <% @customer_foods.each do |customer_food| %>
         <p>食べ物の名前：<%= customer_food.food.name %></p>
@@ -22,11 +22,9 @@
           <% @total += customer_food.food.kcal %>
         <% end %>
         <p>カロリー合計：<%= @total %></p>
-         <%= link_to "消去する",  public_customer_food_path(customer_food.id), method: :delete, "data-confirm" => "Are you sure?" %>
+        <%= link_to "消去する",  public_customer_food_path(customer_food.id), method: :delete, "data-confirm" => "Are you sure?" %>
       <% end %>
-      
-      
-        <%= link_to "リセット",  public_customer_foods_all_destroy_path, method: :delete, "data-confirm" => "Are you sure?" %>
-      </div>
+      <%= link_to "リセット",  public_customer_foods_all_destroy_path, method: :delete, "data-confirm" => "Are you sure?" %>
     </div>
+  </div>
 </div>

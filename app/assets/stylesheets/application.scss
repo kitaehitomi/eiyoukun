@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  padding-bottom: 24px;
+}
+
+.row-wrap{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+}
+
+.row-stretch {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: stretch;
+}

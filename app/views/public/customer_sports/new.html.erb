@@ -1,35 +1,31 @@
 <div class="mx-auto container" style="">
-  <div class="row">
+  <div class="row row-stretch">
   　<div class="col">
- <h3 class="border border-warning rounded-pill">運動一覧</h3>
-        <% @sports.each do |sport| %>
+      <h3 class="border border-warning rounded-pill">運動一覧</h3>
+      <% @sports.each do |sport| %>
         <%= sport.name %>
         <%= sport.kcal %>
         <%= form_with model: @new_customer_sport,url: public_customer_sports_path do |f| %>
-        <%= f.hidden_field :customer_id, :value => current_customer.id %> <!-- 別のテーブルのidを渡す -->
-        <%= f.hidden_field :sport_id, :value => sport.id %>
-        <%= f.submit '記録する' %>
+          <%= f.hidden_field :customer_id, :value => current_customer.id %> <!-- 別のテーブルのidを渡す -->
+          <%= f.hidden_field :sport_id, :value => sport.id %>
+          <%= f.submit '記録する' %>
         <% end %>
-        <% end %>
-
+      <% end %>
     </div>
-   <div class="col">
-       <h3 class="border border-warning rounded-pill">運動の記録</h3>
-      
+    <div class="col">
+      <h3 class="border border-warning rounded-pill">運動の記録</h3>
+
       <% @total=0 %>
       <% @customer_sports.each do |customer_sport| %>
         <% next if customer_sport.sport.nil? %>
-        <p>運動の種類：<%= customer_sport.sport.name %></p>
+          <p>運動の種類：<%= customer_sport.sport.name %></p>
         <% if customer_sport.sport != nil && customer_sport.sport.kcal != nil%>
           <% @total += customer_sport.sport.kcal %>
         <% end %>
         <p>カロリー合計：<%= @total %></p>
-       <%= link_to "消去する",  public_customer_sport_path(customer_sport.id), method: :delete, "data-confirm" => "Are you sure?" %>
+        <%= link_to "消去する",  public_customer_sport_path(customer_sport.id), method: :delete, "data-confirm" => "Are you sure?" %>
       <% end %>
-      
-      
-      
-        <%= link_to "リセット",  public_customer_sports_all_destroy_path, method: :delete, "data-confirm" => "Are you sure?" %>
+      <%= link_to "リセット",  public_customer_sports_all_destroy_path, method: :delete, "data-confirm" => "Are you sure?" %>
     </div>
   </div>
 </div>
