@@ -26,7 +26,7 @@
   <p>ユーザーネーム：<%= post.customer.last_name %><%= post.customer.first_name %>さん</p>
   <p><%= link_to "#{post.post_comments.count} コメント", public_posts_path(post.id) %></p>
   <p><%= link_to "詳細を見る", public_post_path(post.id) %></p>
-  <% if post.customer_id == current_customer.id %>
+  <% if (customer_signed_in? && post.customer_id == current_customer.id) || admin_signed_in? %>
     <p><%= link_to "消去する", public_post_path(post.id), method: :delete %></p>
   <% end %>
   </div>
