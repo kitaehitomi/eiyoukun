@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  validates :title, presence: true
+  validates :caption, presence: true
 
   has_one_attached :image
 

@@ -66,6 +66,8 @@
                       <%= link_to  new_customer_session_path ,class: "nav-link text-white" do %> <i class="text-right"></i><i class="fas fa-user-check"></i> サインイン
                         <%end%>
                     </li>
+                    
+                    <li><%= link_to 'ゲストログイン（閲覧用）', public_customers_guest_sign_in_path, method: :post, class: "login nav-link text-white" %></li>
                     <%end%>
                 </ul>
 

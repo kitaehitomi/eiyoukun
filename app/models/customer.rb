@@ -18,10 +18,20 @@ class Customer < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+
   def bmi
     (self.weight.to_f / (self.height.to_f / 100) / (self.height.to_f / 100)).round(1)
   end
+
   def kcal
     (self.height.to_f / 100) * (self.height.to_f / 100)*22*30.round(1)
+  end
+
+  def self.guest
+    find_or_create_by!(email: 'aaa@aaa.com') do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.first_name = "山田"
+      customer.last_name = "ゲスト"
+    end
   end
 end

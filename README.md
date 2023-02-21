@@ -33,4 +33,4 @@ https://docs.google.com/spreadsheets/d/1765w0u8JX2nBI1m17zHuoPli1U-DD3llbqw3AxbZ
 - IDE：Cloud9
 
 ## 使用素材
-- 使用を検討中です。
+- FontAwesome

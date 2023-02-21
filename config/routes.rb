@@ -10,7 +10,12 @@ Rails.application.routes.draw do
     resources :sports
   end
 
+
+
   namespace :public do
+    devise_scope :customer do
+      post 'customers/guest_sign_in', to: 'sessions#new_guest'
+    end
     delete '/customer_sports/all_destroy'
     resources :customer_sports, only: [:new, :create, :destroy]
     delete '/customer_foods/all_destroy'
@@ -54,4 +59,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
  root to: 'homes#top'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+
+
 end

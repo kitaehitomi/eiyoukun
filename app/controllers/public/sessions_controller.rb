@@ -46,7 +46,14 @@ class Public::SessionsController < Devise::SessionsController
         # ---
         #   ログイン失敗のフラッシュメッセージを仕込むならこのセクション
         redirect_to homes_top_path
+        
+      
       end
     end
+  end
+  def new_guest
+    customer = Customer.guest
+    sign_in customer   # ユーザーをログインさせる
+    redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 end
